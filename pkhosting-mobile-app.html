@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PK Hosting Mobile App</title>
+<style>
+:root{--g:#138a3d;--g2:#0e6e2f;--dk:#1c1919;--ink:#1a1f1c;--bg:#f6f8f6;--line:#e1e7e2;--mut:#667068}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font:15px/1.5 Inter,system-ui,sans-serif;color:var(--ink);background:#d3dbd5;display:flex;justify-content:center;min-height:100vh}
+button,select,textarea,input{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+#app{width:100%;max-width:420px;height:100vh;max-height:880px;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden;margin:auto}
+@media(min-width:500px){#app{border-radius:34px;box-shadow:0 20px 60px rgba(0,0,0,.3);border:8px solid #1c1919;height:860px}}
+.promo{background:var(--g);color:#fff;font-size:12.5px;font-weight:600;padding:8px 12px;display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;position:relative}
+.promo button{border:0;background:#fff;color:var(--ink);font-weight:800;border-radius:6px;padding:2px 8px;font-size:12px}
+.promo .x{background:none;color:#fff;position:absolute;right:6px;top:4px;font-size:16px}
+header{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.lg{font-weight:800;font-size:20px;letter-spacing:-.03em;flex:1;display:flex;align-items:center;gap:4px}
+.lg i{display:inline-grid;gap:2px;width:16px}.lg i:before,.lg i:after{content:"";height:5px;background:var(--g);border-radius:1px}
+.ib{border:1px solid var(--line);background:#fff;border-radius:10px;width:40px;height:38px;position:relative;font-size:12px;font-weight:700}
+.ib b{position:absolute;top:-6px;right:-6px;background:var(--g);color:#fff;border-radius:99px;min-width:18px;height:18px;font-size:11px;display:grid;place-items:center}
+.gs{border:0;background:var(--g);color:#fff;font-weight:700;border-radius:10px;padding:9px 14px;font-size:14px}
+#scr{flex:1;overflow:auto;padding-bottom:16px}
+.pad{padding:0 16px}
+.hero{background:radial-gradient(120% 90% at 0 0,#3a1d22 0,var(--dk) 55%,#1a2a1f 100%);color:#fff;padding:26px 16px 24px}
+.hero small{color:#6ee09a;font-weight:600}
+.hero h1{font-size:30px;line-height:1.1;letter-spacing:-.03em;margin:8px 0 10px}
+.hero p{color:#d6dbd7;font-size:14.5px}
+.row{display:flex;gap:10px;margin-top:16px}.row>*{flex:1}
+.btn{border:0;background:var(--g);color:#fff;font-weight:700;border-radius:10px;padding:12px 14px;text-align:center}
+.btn.w{background:#fff;color:var(--ink)}.btn.o{background:none;border:1px solid var(--line);color:var(--ink)}
+.btn.sm{padding:7px 12px;font-size:13px;flex:none}
+.sb{display:flex;gap:8px;margin-top:14px}.sb input{flex:1;min-width:0;border:0;border-radius:10px;padding:12px;background:#fff;color:var(--ink)}
+.exts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.exts span{background:rgba(255,255,255,.12);border-radius:99px;padding:3px 10px;font-size:12px}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 16px}
+.trust div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:12px;color:var(--mut)}.trust b{display:block;color:var(--g);font-size:15px}
+h2{font-size:20px;letter-spacing:-.02em;margin:20px 16px 4px}.sub{color:var(--mut);margin:0 16px 12px;font-size:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 16px 12px}
+.card h3{font-size:16px}.card p{color:var(--mut);font-size:13.5px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px}.feat .card{margin:0}
+.brands{display:flex;gap:8px;flex-wrap:wrap;margin:0 16px}.brands span{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 16px 10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-size:14px;white-space:nowrap}
+.chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+.seg{display:flex;margin:0 16px 12px;background:#e9eee9;border-radius:10px;padding:3px}
+.seg button{flex:1;border:0;background:none;border-radius:8px;padding:7px;font-weight:600;font-size:13.5px}.seg button.on{background:#fff;color:var(--g)}
+.plan{position:relative}.plan.pop{border:2px solid var(--g)}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;background:#e3f4e9;color:var(--g2);border-radius:99px;padding:2px 10px;margin-bottom:6px}
+.price{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-top:6px}.price small{font-size:13px;font-weight:500;color:var(--mut)}
+.plan ul{list-style:none;padding:0;margin:10px 0 12px}.plan li{font-size:13.5px;padding:3px 0 3px 22px;position:relative}
+.plan li:before{content:"\2713";position:absolute;left:0;color:var(--g);font-weight:800}
+.loc{font-size:12.5px;color:var(--mut)}
+.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}.item div{flex:1}.item small{display:block;color:var(--mut);font-size:12.5px}
+.tag{font-size:12px;font-weight:700;border-radius:99px;padding:3px 10px;background:#e3f4e9;color:var(--g2)}.tag.r{background:#fde2e2;color:#b91c1c}
+label{font-weight:600;font-size:14px;display:block;margin:10px 0 6px}
+.f{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff}textarea.f{min-height:90px;resize:none}
+.chat{display:flex;flex-direction:column;gap:8px;margin:8px 0}.msg{max-width:84%;padding:8px 12px;border-radius:14px;font-size:14px}
+.msg.b{background:var(--bg);border:1px solid var(--line);align-self:flex-start}.msg.u{background:var(--g);color:#fff;align-self:flex-end}
+.tot{display:flex;justify-content:space-between;padding:6px 0}.tot.b{font-weight:800;font-size:17px}
+nav{display:flex;background:#fff;border-top:1px solid var(--line);padding:8px 4px 2px}
+nav button{flex:1;border:0;background:none;color:var(--mut);font-size:11.5px;font-weight:600;display:grid;justify-items:center;gap:2px}
+nav button b{width:40px;height:26px;border-radius:99px;display:grid;place-items:center;font-size:11px}
+nav button.on{color:var(--g)}nav button.on b{background:#e3f4e9}
+.pw{background:#fff;text-align:center;font-size:11px;color:var(--mut);padding:0 0 calc(6px + env(safe-area-inset-bottom,0px))}
+.toast{position:absolute;bottom:92px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap;z-index:9}.toast.on{opacity:1}
+.foot{margin:20px 16px 0;color:var(--mut);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="promo" id="pr">Save 10% on shared &amp; reseller hosting, new customers <button id="cp">WELCOME10 Copy</button><button class="x" id="px" aria-label="Close">&times;</button></div>
+  <header><div class="lg">PK <i></i>Hosting</div><button class="ib" data-tab="cart" aria-label="Cart">Cart<b id="cc">0</b></button><button class="gs" data-tab="account">Client login</button></header>
+  <div id="scr"></div>
+  <div class="toast" id="toast"></div>
+  <nav>
+    <button data-tab="home" class="on"><b>Ho</b>Home</button>
+    <button data-tab="pricing"><b>Rs</b>Pricing</button>
+    <button data-tab="domains"><b>Do</b>Domains</button>
+    <button data-tab="support"><b>Su</b>Support</button>
+    <button data-tab="account"><b>Ac</b>Account</button>
+  </nav>
+  <div class="pw">Powered by Hamza Israr</div>
+</div>
+<script>
+const $=s=>document.querySelector(s),S=$('#scr'),fm=n=>'Rs '+n.toLocaleString('en-US');
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1600)};
+const sh=['Free migration','Unmetered bandwidth (fair use)','Free SSL Certificate'];
+const CATS={
+shared:{n:'Shared',t:'Website hosting',d:'For personal sites, business websites and professional hosting on the managed PK Hosting stack.',p:[
+['Personal Hosting','For students, hobbyists & individuals','Economical',699,6990,[...sh,'1 Website','5 GB SSD Storage','5 Email Accounts','Free .com with a 3-year term','Daily backups, 1-day retention','WordPress Setup Help','PK Hosting Dashboard','Email + Database Support']],
+['Business Hosting','For growing businesses & teams','Most Popular',1999,19990,[...sh,'5 Websites','25 GB SSD Storage','25 Email Accounts','Free .com with a 3-year term','Daily backups, 3-day retention','Priority Setup','Managed DNS Help','Business Email Support']],
+['Professional Hosting','For software houses & corporates','Best Value',3999,39990,[...sh,'10 Websites','50 GB SSD Storage','50 Email Accounts','Free .com with a 3-year term','Daily backups, 5-day retention','No fixed LVE allocation, fair-use CPU, RAM and I/O','Priority Support','Developer-Friendly Setup']]]},
+wp:{n:'WordPress',t:'WordPress plans',d:'Tuned for WordPress: one-click install, free SSL and daily backups, from a single site to ten.',p:[
+['WP Starter','For a single WordPress site','Economical',999,9999,[...sh,'1 WordPress Website','7 GB SSD Storage','Daily backups','1-Click WordPress Install','Email + Database Support']],
+['WP Business','For growing sites & small agencies','Most Popular',1999,19999,[...sh,'3 WordPress Websites','20 GB SSD Storage','Daily backups','1-Click WordPress Install','Priority Setup & Support']],
+['WP Pro','For studios running many WP sites','Best Value',3999,39999,[...sh,'10 WordPress Websites','30 GB SSD Storage','Daily backups','1-Click WordPress Install','Priority Support']]]},
+reseller:{n:'Reseller',t:'Reseller plans',d:'For agencies and developers who need branded hosting accounts with managed setup support.',p:[
+['Reseller R1','Launch your hosting brand','Starter',1499,14990,[...sh.slice(0,2),'25 GB SSD Storage','Managed Hosting Platform','Managed Account Setup','Client Dashboard','Private Nameservers','Free SSL for All Accounts']],
+['Reseller R2','Best storage-to-price fit for a growing client list','Most Popular',2999,29990,[...sh.slice(0,2),'60 GB SSD Storage','Managed Hosting Platform','Managed Account Setup','Client Dashboard','Private Nameservers','Free SSL for All Accounts','Priority Support']],
+['Reseller R3','Highest reseller capacity for established agencies','High Capacity',4999,49990,[...sh.slice(0,2),'120 GB SSD Storage','Managed Hosting Platform','Managed Account Setup','Client Dashboard','Private Nameservers','Free SSL for All Accounts','Dedicated IP on Request']]]},
+cloud:{n:'Cloud VPS',t:'Cloud VPS in Europe',d:'Fast SSD storage on the European network. Windows and backup are optional add-ons.',loc:'Europe',m:11,p:[
+['Cloud VPS Starter','Best-value entry VPS','Best Value',3499,38490,['4 vCPU','8 GB RAM','100 GB SSD (upgradable)','200 Mbit/s port']],
+['Cloud VPS Business','Production workloads','Most Popular',4999,54990,['6 vCPU','12 GB RAM','200 GB SSD (upgradable)','300 Mbit/s port']],
+['Cloud VPS Pro','High-memory applications','High Memory',7999,87990,['8 vCPU','24 GB RAM','300 GB SSD (upgradable)','600 Mbit/s port']],
+['Cloud VPS Elite','Heavy workloads','Power',13999,153990,['12 vCPU','48 GB RAM','400 GB SSD (upgradable)','800 Mbit/s port']],
+['Cloud VPS Max','Large-scale applications','Power',19999,219990,['16 vCPU','64 GB RAM','500 GB SSD (upgradable)','1 Gbit/s port']],
+['Cloud VPS Ultra','Maximum performance','Maximum',26999,296990,['18 vCPU','96 GB RAM','600 GB SSD (upgradable)','1 Gbit/s port']]],x:['Free migration','Unmetered transfer','Root / SSH included','IPv4 + IPv6 included']},
+premium:{n:'Premium VPS',t:'Premium VPS in Virginia, US',d:'NVMe storage with daily backup included. Windows licensing is optional.',loc:'Virginia, United States',m:11,p:[
+['Premium VPS Nano','Small apps on premium US network','Entry',2999,32990,['2 vCPU','4 GB RAM','40 GB NVMe','500 Mbit/s port']],
+['Premium VPS Starter','Premium 8 GB US network','Premium',4499,49490,['4 vCPU','8 GB RAM','75 GB NVMe','1 Gbit/s port']],
+['Premium VPS Pro','Premium 12 GB US network','Premium',5999,65990,['6 vCPU','12 GB RAM','100 GB NVMe','2 Gbit/s port']],
+['Premium VPS Max','Premium 24 GB US network','Premium',11499,126489,['8 vCPU','24 GB RAM','200 GB NVMe','3 Gbit/s port']]],x:['Free migration','Unmetered transfer','Anti-DDoS + daily snapshot','Root / SSH included']},
+ded:{n:'Dedicated',t:'Bare-metal server tiers',d:'Starting budgets only. Exact CPU, RAM, drives and location are confirmed in writing before payment.',loc:'Europe (Germany, Nuremberg)',q:1,p:[
+['Dedicated Entry','Bare-metal starter','',24999,249990,['4 cores / 32 GB RAM / 2x480 GB SSD / 1 Gbps (typical minimum)','Linux; Windows by license','Root / SSH included','Managed option available']],
+['Dedicated Business','Heavier production workloads','Popular',27999,279990,['8 cores / 64 GB RAM / 2x960 GB NVMe / 1 Gbps (typical minimum)','Linux; Windows by license','Root / SSH included','Managed option available']],
+['Dedicated Enterprise','For larger production workloads','',44999,449990,['16 cores / 128 GB RAM / 2x1.92 TB NVMe / 1 Gbps+ (typical minimum)','Linux; Windows by license','Root / SSH included','Priority managed option']]]}};
+const DOM=[['.com','Rs 3,999','/yr','Renew Rs 5,590/yr'],['.pk','Rs 4,699','/2yr','Min. 2-year term'],['.com.pk','Rs 4,699','/2yr','Min. 2-year term'],['.org.pk','Rs 4,699','/2yr','Min. 2-year term'],['.net.pk','Rs 4,699','/2yr','Min. 2-year term'],['.net','Rs 4,999','/yr','Renew Rs 4,999/yr'],['.org','Rs 5,499','/yr','Renew Rs 5,499/yr'],['.info','Rs 9,599','/yr','Renew Rs 9,999/yr'],['.store','Rs 18,199','/yr','Renew Rs 18,199/yr'],['.io','Rs 16,999','/yr','Renew Rs 16,999/yr'],['.co','Rs 10,999','/yr','Renew Rs 10,999/yr'],['.xyz','Rs 1,999','/yr','Renew Rs 5,999/yr'],['.online','Rs 12,599','/yr','Renew Rs 12,599/yr'],['.tech','Rs 22,299','/yr','Renew Rs 22,299/yr'],['.app','Rs 4,999','/yr','Renew Rs 4,999/yr']];
+const num=s=>+s.replace(/[^0-9]/g,'');
+let cart=[],cat='shared',term='m',tab='home',coupon=false,tix=[];
+const upd=()=>$('#cc').textContent=cart.length;
+function setTab(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab==t));({home,pricing,domains,support,account,cart:cartView})[t]();S.scrollTop=0}
+const foot=`<p class="foot">PK Hosting, 231-B Main Boulevard, Phase 8 DHA, Lahore<br>A product of TechAbout (Private) Limited</p>`;
+function home(){S.innerHTML=`<div class="hero"><small>16+ Years, Pakistan Hosting Support</small><h1>Web Hosting in Pakistan with Local Support</h1><p>We treat your website as our own. Compare hosting, domains, VPS and dedicated server options, then complete checkout and billing here.</p>
+<div class="row"><button class="btn w" data-tab="pricing">View Pricing</button><button class="btn o" style="color:#fff;border-color:#ffffff55" data-pick="cloud">Explore Servers</button></div>
+<div class="sb"><input id="hq" placeholder="Find your domain" aria-label="Domain name"><button class="btn" id="hs">Search</button></div><div class="exts">${DOM.slice(0,5).map(d=>`<span>${d[0]} ${d[1]}${d[2]}</span>`).join('')}</div></div>
+<div class="trust"><div><b>16+ yrs</b>Hosting Pakistani sites</div><div><b>Free SSL</b>On every plan</div><div><b>Rs 699</b>Starting per month</div></div>
+<h2>Everything you need to succeed online</h2><p class="sub">Clear plan information, practical hosting support and a clean client dashboard.</p>
+<div class="feat">${[['Fast SSD Storage','Shared hosting runs on SSD storage with a tuned managed stack.'],['SSL & Security','SSL support, secure defaults and practical guidance.'],['Real Human Support','Local team by phone, email and tickets.'],['Daily Backups','Files, databases and email included, per Backup Policy.'],['Assisted Migration','We help move eligible websites, email and databases.'],['1-Click WordPress','Launch WordPress quickly with setup help.']].map(f=>`<div class="card"><h3 style="font-size:14.5px">${f[0]}</h3><p>${f[1]}</p></div>`).join('')}</div>
+<h2>Pick a plan that grows with you</h2>${CATS.shared.p.map((p,i)=>planCard('shared',i,'m')).join('')}
+<h2>Trusted across the TechAbout network</h2><div class="brands">${['TECHi.com','WPArena.com','TechEngage.com','Medic.pk','MetalSite.com','AccountStop.com','aiTransform.com'].map(b=>`<span>${b}</span>`).join('')}</div>
+<h2>Customer love</h2>${[['PK Hosting helped us move our sites with clear communication and practical setup advice.','Hamza Khalid, Founder, Tenocation'],['The reseller setup gives me a simple way to manage client hosting without building the server stack myself.','Ayesha Siddiqui, Freelance Developer'],['Local support and practical server guidance make a real difference when a business site needs attention.','Bilal Ahmed, CTO, Pakwall']].map(r=>`<div class="card"><p style="color:var(--ink)">"${r[0]}"</p><p style="margin-top:6px">${r[1]}<br>Verified PK Hosting customer</p></div>`).join('')}${foot}`;
+$('#hs').onclick=()=>{domSearch($('#hq').value);setTab('domains');domSearch($('#hq').value,1)}}
+function planCard(c,i,tm){const C=CATS[c],p=C.p[i],price=tm=='m'?p[3]:p[4],f=p[5].concat(C.x||[]);
+return `<div class="card plan ${p[2]=='Most Popular'||p[2]=='Popular'?'pop':''}">${p[2]?`<span class="badge">${p[2]}</span>`:''}<h3>${p[0]}</h3><p>${p[1]}</p>${C.loc?`<p class="loc">${C.loc}</p>`:''}<div class="price">${fm(price)}<small>${tm=='m'?'/mo':'/yr'}</small></div>${tm=='m'?'':`<p class="loc">Billed annually (${C.m||10}x monthly rate)</p>`}<ul>${f.map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn" style="width:100%" data-add="${c}|${i}">${C.q?'Check inventory and get quote':'Order Now'}</button></div>`}
+function pricing(){const C=CATS[cat];S.innerHTML=`<h2 style="margin-top:16px">Hosting, server and domain pricing</h2><p class="sub">Live catalogue from the same billing source as checkout. Shared hosting for 3 years includes a free .com.</p>
+<div class="chips">${Object.keys(CATS).map(k=>`<button class="chip ${k==cat?'on':''}" data-pick="${k}">${CATS[k].n}</button>`).join('')}</div>
+<div class="seg"><button class="${term=='m'?'on':''}" data-term="m">Monthly</button><button class="${term=='y'?'on':''}" data-term="y">Annually</button></div>
+<h2 style="margin-top:4px">${C.t}</h2><p class="sub">${C.d}</p>${C.p.map((_,i)=>planCard(cat,i,term)).join('')}<p class="foot" style="margin-top:0">2 year (save up to 16%) and 3 year (save up to 36%) terms are selected at checkout.</p>
+<h2>Website retainers</h2><p class="sub">We build the site. You talk to us on WhatsApp.</p>${[['Launch','Rs 100,000/year','Up to 8-page business website|Mobile-first design + SSL|Contact form and WhatsApp CTA|Basic on-page SEO'],['Growth','Rs 300,000/year','Up to 15 pages|Business email setup|Lead capture|Monthly content refresh'],['Brand','Rs 500,000/year','Larger site + blog|Business email + social media management|Quarterly ranking review']].map(r=>`<div class="card plan"><h3>${r[0]}</h3><div class="price" style="font-size:22px">${r[1]}</div><ul>${r[2].split('|').map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn o" style="width:100%" data-t="Quote request sent (${r[0]})">Request a quote</button></div>`).join('')}${foot}`}
+function domSearch(v,show){const q=(v||'').trim().toLowerCase().replace(/[^a-z0-9-]/g,'');if(!show)return;const el=$('#dr');if(!q){toast('Type a domain name');return}$('#dq').value=q;
+el.innerHTML=DOM.slice(0,6).map((d,i)=>{const tk=(q.length+i)%4==0;return `<div class="item"><div>${q}${d[0]}<small>${d[1]}${d[2]}</small></div>${tk?'<span class="tag r">Taken</span>':`<button class="btn sm" data-dom="${q}${d[0]}|${num(d[1])}">Add</button>`}</div>`}).join('')}
+function domains(){S.innerHTML=`<h2 style="margin-top:16px">Find your domain</h2><p class="sub">Live domain availability. Final activation is confirmed before registration.</p>
+<div class="card"><div class="sb" style="margin:0"><input class="f" id="dq" placeholder="mybrand" aria-label="Domain name"><button class="btn" id="ds">Search</button></div><div id="dr" style="margin-top:8px"></div></div>
+<h2>Popular domain registration prices</h2><div class="card">${DOM.map(d=>`<div class="item"><div><b>${d[0]}</b><small>${d[3]}</small></div><b>${d[1]}<small style="display:inline;font-weight:400"> ${d[2]}</small></b></div>`).join('')}</div>
+<div class="card"><h3>Transfer a domain</h3><p>Move your domain to PK Hosting.</p><button class="btn o" style="margin-top:8px" data-t="Transfer request started">Start transfer</button></div>
+<div class="card"><h3>Free tools</h3><p>WHOIS, DNS, SSL, speed test and more.</p><div class="row" style="flex-wrap:wrap">${['WHOIS','DNS Checker','SSL Checker','Speed Test'].map(t=>`<button class="btn o sm" data-t="Opening ${t}">${t}</button>`).join('')}</div></div>${foot}`;
+$('#ds').onclick=()=>domSearch($('#dq').value,1)}
+function support(){S.innerHTML=`<h2 style="margin-top:16px">Support</h2><p class="sub">Live chat and phone: Mon to Fri, 9am to 6pm PKT. Tickets are answered every day.</p>
+<div class="card"><div class="item"><div>Call us<small>(042) 35692952</small></div><button class="btn sm" data-t="Calling (042) 35692952">Call</button></div><div class="item"><div>Email<small>support@pkhosting.com</small></div><button class="btn sm o" data-t="Opening email">Email</button></div></div>
+<div class="card"><h3>Open a ticket</h3><label>Subject</label><input class="f" id="ts"><label>Message</label><textarea class="f" id="tm" placeholder="Describe the problem"></textarea><button class="btn" id="tb" style="width:100%;margin-top:12px">Send ticket</button></div>
+${tix.length?`<div class="card"><h3>My tickets</h3>${tix.map(t=>`<div class="item"><div>${t}<small>Reply within 1 business day</small></div><span class="tag">Open</span></div>`).join('')}</div>`:''}
+<div class="card"><h3>Live chat</h3><div class="chat" id="ch"><div class="msg b">Assalam o Alaikum! How can we help?</div></div><div class="sb" style="margin:0"><input class="f" id="cm" placeholder="Type a message" aria-label="Message"><button class="btn" id="cs">Send</button></div></div>${foot}`;
+$('#tb').onclick=()=>{const s=$('#ts').value.trim();if(!s||!$('#tm').value.trim())return toast('Fill subject and message');tix.unshift(s);toast('Ticket sent');support()};
+$('#cs').onclick=()=>{const v=$('#cm').value.trim();if(!v)return;$('#ch').insertAdjacentHTML('beforeend','<div class="msg u"></div>');$('#ch').lastChild.textContent=v;$('#cm').value='';setTimeout(()=>$('#ch').insertAdjacentHTML('beforeend','<div class="msg b">Thanks. A team member will reply shortly.</div>'),700)}}
+function account(){S.innerHTML=`<h2 style="margin-top:16px">Client login</h2><p class="sub">Manage services, invoices and payments.</p><div class="card"><label>Email</label><input class="f" id="le" type="email" placeholder="you@example.com"><label>Password</label><input class="f" id="lp" type="password"><button class="btn" id="lb" style="width:100%;margin-top:14px">Log in</button></div>
+<div class="card"><h3>We accept</h3><p>Stripe, PayPal, JazzCash, Easypaisa, Bank account</p></div>${foot}`;
+$('#lb').onclick=()=>{if(!$('#le').value||!$('#lp').value)return toast('Enter email and password');dash()}}
+function dash(){S.innerHTML=`<h2 style="margin-top:16px">My services</h2><div class="card"><div class="item"><div>Business Hosting<small>mybrand.pk</small></div><span class="tag">Active</span></div><div class="item"><div>Disk 8 / 25 GB<small>Email accounts 6 / 25</small></div><button class="btn sm" data-t="Opening dashboard">Manage</button></div></div>
+<h2>Invoices</h2><div class="card"><div class="item"><div>INV-1042<small>Business Hosting, Rs 19,990</small></div><button class="btn sm" data-t="Payment page opened">Pay</button></div><div class="item"><div>INV-1017<small>mybrand.pk, Rs 4,699</small></div><span class="tag">Paid</span></div></div><button class="btn o" style="margin:0 16px;width:calc(100% - 32px)" data-tab="account">Log out</button>`}
+function cartView(){const sub=cart.reduce((a,c)=>a+c.price,0),dis=coupon?Math.round(cart.filter(c=>c.disc).reduce((a,c)=>a+c.price,0)*.1):0;
+S.innerHTML=`<h2 style="margin-top:16px">Your cart</h2>`+(cart.length?`<div class="card">${cart.map((c,i)=>`<div class="item"><div>${c.name}<small>${c.term}</small></div><b>${fm(c.price)}</b><button class="btn sm o" data-rm="${i}" aria-label="Remove">x</button></div>`).join('')}</div>
+<div class="card"><label>Coupon code</label><div class="sb" style="margin:0"><input class="f" id="co" placeholder="WELCOME10"><button class="btn" id="ca">Apply</button></div><p style="margin-top:6px">${coupon?'WELCOME10 applied to shared and reseller hosting.':'10% off shared and reseller hosting for new customers.'}</p></div>
+<div class="card"><div class="tot"><span>Subtotal</span><span>${fm(sub)}</span></div>${dis?`<div class="tot"><span>Discount</span><span>- ${fm(dis)}</span></div>`:''}<div class="tot b"><span>Total</span><span>${fm(sub-dis)}</span></div><label>Payment method</label><select class="f"><option>Stripe</option><option>PayPal</option><option>JazzCash</option><option>Easypaisa</option><option>Bank account</option></select><button class="btn" style="width:100%;margin-top:14px" id="ck">Checkout securely</button></div>`:'<div class="card" style="text-align:center;color:var(--mut)">Your cart is empty.<br><button class="btn" style="margin-top:12px" data-tab="pricing">View pricing</button></div>');
+if($('#ca'))$('#ca').onclick=()=>{if($('#co').value.trim().toUpperCase()=='WELCOME10'){coupon=true;cartView();toast('Coupon applied')}else toast('Invalid coupon')};
+if($('#ck'))$('#ck').onclick=()=>{cart=[];coupon=false;upd();toast('Order placed. We will confirm shortly.');cartView()}}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+if(d.tab)setTab(d.tab);
+else if(d.pick){cat=d.pick;term=term;setTab('pricing')}
+else if(d.term){term=d.term;pricing()}
+else if(d.add){const[c,i]=d.add.split('|'),C=CATS[c],p=C.p[i];if(C.q)return toast('Quote request sent for '+p[0]);cart.push({name:p[0],term:term=='m'?'Monthly':'Annually',price:term=='m'?p[3]:p[4],disc:c=='shared'||c=='reseller'});upd();toast(p[0]+' added to cart')}
+else if(d.dom){const[n,pr]=d.dom.split('|');cart.push({name:n,term:'Domain registration',price:+pr});upd();toast(n+' added to cart')}
+else if(d.rm){cart.splice(+d.rm,1);upd();cartView()}
+else if(d.t)toast(d.t);
+else if(b.id=='cp'){navigator.clipboard&&navigator.clipboard.writeText('WELCOME10').catch(()=>{});toast('WELCOME10 copied')}
+else if(b.id=='px')$('#pr').remove()});
+home();
+</script>
+</body>
+</html>
